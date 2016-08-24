@@ -1,4 +1,7 @@
 import os
+import shutil
+
+# TODO create GUID
 
 # Settings - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -41,10 +44,10 @@ numberOfParameters = input('\tEnter number of custom parameter (default 2): ')
 
 print('\n\tStarting ' + pluginName + ' plug-in generation...')
 
-print('\n\tGenerating VB project file plug-in generation...')
+print('\n\tGenerating VB project file')
 
 print('\t\tSource \t\t\t' + tagSourceFolderPath + tagProjectSourceFileName)
-print('\t\tDestination \t' + tagDestinationFolder + tagProjectDestinationFileName)
+print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagProjectDestinationFileName)
 
 if not os.path.exists(tagDestinationFolder + tagProjectDestinationFileName):
     os.makedirs(tagDestinationFolder + pluginProjectName)
@@ -100,3 +103,35 @@ while True:
 
 tagProjectSource.close()
 tagProjectDestination.close()
+
+
+tagClaKernelDestinationFileName = 'cla' + pluginName + 'Kernel.cls'
+print('\n\tGenerating Kernel class')
+
+print('\t\tSource \t\t\t' + tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateKernelSourceFileName)
+print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaKernelDestinationFileName)
+
+if not os.path.exists(tagDestinationFolder + tagProjectDestinationFileName):
+    os.makedirs(tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath )
+
+shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateKernelSourceFileName,
+                tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaKernelDestinationFileName)
+
+tagClaOffsetDestinationFileName = tagClaErrorsOffsetsSourceFileName
+print('\n\tGenerating Offset class')
+
+print('\t\tSource \t\t\t' + tagSourceFolderPath + tagClassesFolderPath + tagClaErrorsOffsetsSourceFileName)
+print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaOffsetDestinationFileName)
+
+shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaErrorsOffsetsSourceFileName,
+                tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaOffsetDestinationFileName)
+
+tagClaDestinationFileName = 'cla' + pluginName + '.cls'
+print('\n\tGenerating main class')
+
+print('\t\tSource \t\t\t' + tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateSourceFileName)
+print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaDestinationFileName)
+
+shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateSourceFileName,
+                tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaDestinationFileName)
+
