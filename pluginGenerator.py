@@ -54,30 +54,49 @@ tagProjectDestination = open(tagDestinationFolder + pluginProjectName + "\\" + t
 
 while True:
     line = tagProjectSource.readline()
-    print(line)
 
     if line == '':
         break
 
     if line.strip() == '{classes}':
-        tagProjectDestination.write('Class = cla' + pluginProjectName + 'Kernel; Classes\cla' + pluginProjectName + 'Kernel.cls\n')
+        tagProjectDestination.write('Class = cla' + pluginName + 'Kernel; Classes\cla' + pluginName + 'Kernel.cls\n')
         tagProjectDestination.write('Class = claErrorsOffsets; Classes\claErrorsOffsets.cls\n')
-        tagProjectDestination.write('Class = cla' + pluginProjectName + '; Classes\cla' + pluginProjectName + '.cls\n')
+        tagProjectDestination.write('Class = cla' + pluginName + '; Classes\cla' + pluginName + '.cls\n')
         continue
 
     if line.strip() == '{forms}':
-        tagProjectDestination.write('Form = Forms\\frm' + pluginProjectName + '.frm\n')
+        tagProjectDestination.write('Form = Forms\\frm' + pluginName + '.frm\n')
         continue
 
     if line.strip() == '{title}':
         tagProjectDestination.write('Title = "' + pluginProjectName + '"\n')
         continue
 
+    if line.strip() == '{exeName}':
+        tagProjectDestination.write('ExeName32 = "' + pluginProjectName + '.dll"\n')
+        continue
+
+    if line.strip() == '{name}':
+        tagProjectDestination.write('Name="' + pluginProjectName + '"\n')
+        continue
+
+    if line.strip() == '{description}':
+        tagProjectDestination.write('Description = "' + pluginProjectName + '_V1"\n')
+        continue
+
+    if line.strip() == '{CompatibleEXE32}':
+        tagProjectDestination.write('CompatibleEXE32="..\..\BIN\\' + pluginProjectName + '.dll"\n')
+        continue
+
+    if line.strip() == '{VersionFileDescription}':
+        tagProjectDestination.write('VersionFileDescription = "' + pluginProjectName + '_V1"\n')
+        continue
+
+    if line.strip() == '{VersionProductName}':
+        tagProjectDestination.write('VersionProductName = "' + pluginName + ' Plugin"\n')
+        continue
+
     tagProjectDestination.write(line)
 
 tagProjectSource.close()
 tagProjectDestination.close()
-
-
-
-
