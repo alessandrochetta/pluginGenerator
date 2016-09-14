@@ -1,37 +1,8 @@
 import os
 import shutil
+import settings
 
 # TODO create GUID
-
-# Settings - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# - - - Source
-# - - - - - - Tag Template Source
-#
-tagSourceFolderPath = 'Templates\E2S_TagTemplate\\'
-tagProjectSourceFileName = 'E2S_TagTemplate.vbp'
-#
-# - - - - - - - - - Classes
-#
-tagClassesFolderPath = 'Classes\\'
-tagClaErrorsOffsetsSourceFileName = 'claErrorsOffsets.cls'
-tagClaTagTemplateSourceFileName = 'claTagTemplate.cls'
-tagClaTagTemplateKernelSourceFileName = 'claTagTemplateKernel.cls'
-#
-# - - - - - - - - - Forms
-#
-tagFormsFolderPath = 'Forms\\'
-tagFrmTagTemplateSourceFileName = 'frmTagTemplate.frm'
-tagFrmTagTemplateFrxSourceFileName = 'frmTagTemplate.frx'
-#
-# - - - - - - - - - Modules
-#
-tagModulesFolderPath = 'Modules\\'
-tagModConstFileName = 'ModConst.bas'
-#
-# - - - Destination
-#
-tagDestinationFolder = 'generated_plug-ins\\tags\\'
 
 print('Plug-in generator')
 
@@ -46,14 +17,14 @@ print('\n\tStarting ' + pluginName + ' plug-in generation...')
 
 print('\n\tGenerating VB project file')
 
-print('\t\tSource \t\t\t' + tagSourceFolderPath + tagProjectSourceFileName)
-print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagProjectDestinationFileName)
+print('\t\tSource \t\t\t' + settings.tagSourceFolderPath + settings.tagProjectSourceFileName)
+print('\t\tDestination \t' + settings.tagDestinationFolder + pluginProjectName + '\\' + tagProjectDestinationFileName)
 
-if not os.path.exists(tagDestinationFolder + tagProjectDestinationFileName):
-    os.makedirs(tagDestinationFolder + pluginProjectName)
+if not os.path.exists(settings.tagDestinationFolder + tagProjectDestinationFileName):
+    os.makedirs(settings.tagDestinationFolder + pluginProjectName)
 
-tagProjectSource = open(tagSourceFolderPath + tagProjectSourceFileName, 'r')
-tagProjectDestination = open(tagDestinationFolder + pluginProjectName + "\\" + tagProjectDestinationFileName, 'w')
+tagProjectSource = open(settings.tagSourceFolderPath + settings.tagProjectSourceFileName, 'r')
+tagProjectDestination = open(settings.tagDestinationFolder + pluginProjectName + "\\" + tagProjectDestinationFileName, 'w')
 
 while True:
     line = tagProjectSource.readline()
@@ -108,66 +79,66 @@ tagProjectDestination.close()
 tagClaKernelDestinationFileName = 'cla' + pluginName + 'Kernel.cls'
 print('\n\tGenerating Kernel class')
 
-print('\t\tSource \t\t\t' + tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateKernelSourceFileName)
-print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaKernelDestinationFileName)
+print('\t\tSource \t\t\t' + settings.tagSourceFolderPath + settings.tagClassesFolderPath + settings.tagClaTagTemplateKernelSourceFileName)
+print('\t\tDestination \t' + settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagClassesFolderPath + tagClaKernelDestinationFileName)
 
-if not os.path.exists(tagDestinationFolder + tagProjectDestinationFileName):
-    os.makedirs(tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath )
+if not os.path.exists(settings.tagDestinationFolder + tagProjectDestinationFileName):
+    os.makedirs(settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagClassesFolderPath )
 
-shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateKernelSourceFileName,
-                tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaKernelDestinationFileName)
+shutil.copyfile(settings.tagSourceFolderPath + settings.tagClassesFolderPath + settings.tagClaTagTemplateKernelSourceFileName,
+                settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagClassesFolderPath + tagClaKernelDestinationFileName)
 
 
-tagClaOffsetDestinationFileName = tagClaErrorsOffsetsSourceFileName
+tagClaOffsetDestinationFileName = settings.tagClaErrorsOffsetsSourceFileName
 print('\n\tGenerating Offset class')
 
-print('\t\tSource \t\t\t' + tagSourceFolderPath + tagClassesFolderPath + tagClaErrorsOffsetsSourceFileName)
-print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaOffsetDestinationFileName)
+print('\t\tSource \t\t\t' + settings.tagSourceFolderPath + settings.tagClassesFolderPath + settings.tagClaErrorsOffsetsSourceFileName)
+print('\t\tDestination \t' + settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagClassesFolderPath + tagClaOffsetDestinationFileName)
 
-shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaErrorsOffsetsSourceFileName,
-                tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaOffsetDestinationFileName)
+shutil.copyfile(settings.tagSourceFolderPath + settings.tagClassesFolderPath + settings.tagClaErrorsOffsetsSourceFileName,
+                settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagClassesFolderPath + tagClaOffsetDestinationFileName)
 
 
 tagClaDestinationFileName = 'cla' + pluginName + '.cls'
 print('\n\tGenerating main class')
 
-print('\t\tSource \t\t\t' + tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateSourceFileName)
-print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaDestinationFileName)
+print('\t\tSource \t\t\t' + settings.tagSourceFolderPath + settings.tagClassesFolderPath + settings.tagClaTagTemplateSourceFileName)
+print('\t\tDestination \t' + settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagClassesFolderPath + tagClaDestinationFileName)
 
-shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateSourceFileName,
-                tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaDestinationFileName)
+shutil.copyfile(settings.tagSourceFolderPath + settings.tagClassesFolderPath + settings.tagClaTagTemplateSourceFileName,
+                settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagClassesFolderPath + tagClaDestinationFileName)
 
 
 tagFrmDestinationFileName = 'frm' + pluginName + '.frm'
 print('\n\tGenerating Forms')
 
-print('\t\tSource \t\t\t' + tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateSourceFileName)
-print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmDestinationFileName)
+print('\t\tSource \t\t\t' + settings.tagSourceFolderPath + settings.tagFormsFolderPath + settings.tagFrmTagTemplateSourceFileName)
+print('\t\tDestination \t' + settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagFormsFolderPath + tagFrmDestinationFileName)
 
-if not os.path.exists(tagDestinationFolder + tagProjectDestinationFileName):
-    os.makedirs(tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath)
+if not os.path.exists(settings.tagDestinationFolder + tagProjectDestinationFileName):
+    os.makedirs(settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagFormsFolderPath)
 
-shutil.copyfile(tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateSourceFileName,
-                tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmDestinationFileName)
+shutil.copyfile(settings.tagSourceFolderPath + settings.tagFormsFolderPath + settings.tagFrmTagTemplateSourceFileName,
+                settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagFormsFolderPath + tagFrmDestinationFileName)
 
 
 #tagFrmFrxDestinationFileName = 'frm' + pluginName + '.frx'
 
-print('\t\tSource \t\t\t' + tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName)
-print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName)
+print('\t\tSource \t\t\t' + settings.tagSourceFolderPath + settings.tagFormsFolderPath + settings.tagFrmTagTemplateFrxSourceFileName)
+print('\t\tDestination \t' + settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagFormsFolderPath + settings.tagFrmTagTemplateFrxSourceFileName)
 
-shutil.copyfile(tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName,
-                tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName)
+shutil.copyfile(settings.tagSourceFolderPath + settings.tagFormsFolderPath + settings.tagFrmTagTemplateFrxSourceFileName,
+                settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagFormsFolderPath + settings.tagFrmTagTemplateFrxSourceFileName)
 
 
-tagModConstDestinationFileName = tagModConstFileName
+tagModConstDestinationFileName = settings.tagModConstFileName
 print('\n\tGenerating Modules')
 
-print('\t\tSource \t\t\t' + tagSourceFolderPath + tagModulesFolderPath + tagModConstFileName)
-print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath + tagModConstDestinationFileName)
+print('\t\tSource \t\t\t' + settings.tagSourceFolderPath + settings.tagModulesFolderPath + settings.tagModConstFileName)
+print('\t\tDestination \t' + settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagModulesFolderPath + tagModConstDestinationFileName)
 
-if not os.path.exists(tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath):
-    os.makedirs(tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath)
+if not os.path.exists(settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagModulesFolderPath):
+    os.makedirs(settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagModulesFolderPath)
 
-shutil.copyfile(tagSourceFolderPath + tagModulesFolderPath + tagModConstFileName,
-                tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath + tagModConstDestinationFileName)
+shutil.copyfile(settings.tagSourceFolderPath + settings.tagModulesFolderPath + settings.tagModConstFileName,
+                settings.tagDestinationFolder + pluginProjectName + '\\' + settings.tagModulesFolderPath + tagModConstDestinationFileName)
