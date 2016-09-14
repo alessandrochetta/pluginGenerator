@@ -62,21 +62,21 @@ while True:
         break
 
     if line.strip() == '{classes}':
-        tagProjectDestination.write('Class = cla' + pluginName + 'Kernel; Classes\cla' + pluginName + 'Kernel.cls\n')
-        tagProjectDestination.write('Class = claErrorsOffsets; Classes\claErrorsOffsets.cls\n')
-        tagProjectDestination.write('Class = cla' + pluginName + '; Classes\cla' + pluginName + '.cls\n')
+        tagProjectDestination.write('Class=cla' + pluginName + 'Kernel; Classes\cla' + pluginName + 'Kernel.cls\n')
+        tagProjectDestination.write('Class=claErrorsOffsets; Classes\claErrorsOffsets.cls\n')
+        tagProjectDestination.write('Class=cla' + pluginName + '; Classes\cla' + pluginName + '.cls\n')
         continue
 
     if line.strip() == '{forms}':
-        tagProjectDestination.write('Form = Forms\\frm' + pluginName + '.frm\n')
+        tagProjectDestination.write('Form=Forms\\frm' + pluginName + '.frm\n')
         continue
 
     if line.strip() == '{title}':
-        tagProjectDestination.write('Title = "' + pluginProjectName + '"\n')
+        tagProjectDestination.write('Title="' + pluginProjectName + '"\n')
         continue
 
     if line.strip() == '{exeName}':
-        tagProjectDestination.write('ExeName32 = "' + pluginProjectName + '.dll"\n')
+        tagProjectDestination.write('ExeName32="' + pluginProjectName + '.dll"\n')
         continue
 
     if line.strip() == '{name}':
@@ -84,7 +84,7 @@ while True:
         continue
 
     if line.strip() == '{description}':
-        tagProjectDestination.write('Description = "' + pluginProjectName + '_V1"\n')
+        tagProjectDestination.write('Description="' + pluginProjectName + '_V1"\n')
         continue
 
     if line.strip() == '{CompatibleEXE32}':
@@ -92,11 +92,11 @@ while True:
         continue
 
     if line.strip() == '{VersionFileDescription}':
-        tagProjectDestination.write('VersionFileDescription = "' + pluginProjectName + '_V1"\n')
+        tagProjectDestination.write('VersionFileDescription="' + pluginProjectName + '_V1"\n')
         continue
 
     if line.strip() == '{VersionProductName}':
-        tagProjectDestination.write('VersionProductName = "' + pluginName + ' Plugin"\n')
+        tagProjectDestination.write('VersionProductName="' + pluginName + ' Plugin"\n')
         continue
 
     tagProjectDestination.write(line)
@@ -117,6 +117,7 @@ if not os.path.exists(tagDestinationFolder + tagProjectDestinationFileName):
 shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateKernelSourceFileName,
                 tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaKernelDestinationFileName)
 
+
 tagClaOffsetDestinationFileName = tagClaErrorsOffsetsSourceFileName
 print('\n\tGenerating Offset class')
 
@@ -125,6 +126,7 @@ print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + t
 
 shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaErrorsOffsetsSourceFileName,
                 tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaOffsetDestinationFileName)
+
 
 tagClaDestinationFileName = 'cla' + pluginName + '.cls'
 print('\n\tGenerating main class')
@@ -135,3 +137,37 @@ print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + t
 shutil.copyfile(tagSourceFolderPath + tagClassesFolderPath + tagClaTagTemplateSourceFileName,
                 tagDestinationFolder + pluginProjectName + '\\' + tagClassesFolderPath + tagClaDestinationFileName)
 
+
+tagFrmDestinationFileName = 'frm' + pluginName + '.frm'
+print('\n\tGenerating Forms')
+
+print('\t\tSource \t\t\t' + tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateSourceFileName)
+print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmDestinationFileName)
+
+if not os.path.exists(tagDestinationFolder + tagProjectDestinationFileName):
+    os.makedirs(tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath)
+
+shutil.copyfile(tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateSourceFileName,
+                tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmDestinationFileName)
+
+
+#tagFrmFrxDestinationFileName = 'frm' + pluginName + '.frx'
+
+print('\t\tSource \t\t\t' + tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName)
+print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName)
+
+shutil.copyfile(tagSourceFolderPath + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName,
+                tagDestinationFolder + pluginProjectName + '\\' + tagFormsFolderPath + tagFrmTagTemplateFrxSourceFileName)
+
+
+tagModConstDestinationFileName = tagModConstFileName
+print('\n\tGenerating Modules')
+
+print('\t\tSource \t\t\t' + tagSourceFolderPath + tagModulesFolderPath + tagModConstFileName)
+print('\t\tDestination \t' + tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath + tagModConstDestinationFileName)
+
+if not os.path.exists(tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath):
+    os.makedirs(tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath)
+
+shutil.copyfile(tagSourceFolderPath + tagModulesFolderPath + tagModConstFileName,
+                tagDestinationFolder + pluginProjectName + '\\' + tagModulesFolderPath + tagModConstDestinationFileName)
